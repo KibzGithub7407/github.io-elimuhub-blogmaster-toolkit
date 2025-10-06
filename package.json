@@ -1,0 +1,28 @@
+{
+  "name": "elimuhub-blogmaster-toolkit",
+  "version": "1.0.0",
+  "description": "GitHub Pages resource hub for Elimuhub Education Consultants",
+  "main": "index.html",
+  "scripts": {
+    "dev": "live-server --port=3000",
+    "build": "echo 'No build process required for static site'",
+    "deploy": "gh-pages -d ."
+  },
+  "keywords": [
+    "education",
+    "blogger",
+    "seo",
+    "tools",
+    "elimuhub"
+  ],
+  "author": "KibzGithub7407",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "gh-pages": "^4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KibzGithub7407/github.io-elimuhub-blogmaster-toolkit.git"
+  }
+}
