@@ -1,7 +1,0 @@
-title: "Elimuhub Webmaster Toolkit"
-description: "Resource hub connecting Elimuhub's Blogger site with SEO and analytics tools."
-theme: minima
-plugins:
-  - jekyll-seo-tag
-  - jekyll-sitemap
-baseurl: "" # for user pages
