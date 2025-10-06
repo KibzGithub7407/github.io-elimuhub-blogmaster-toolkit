@@ -1,0 +1,271 @@
+// assets/js/blogger-analyzer.js - Blogger Analysis Engine
+
+class BloggerAnalyzer {
+    constructor() {
+        this.currentUrl = '';
+        this.analysisResults = {};
+    }
+
+    // Main analysis function
+    async analyzeBloggerSite(url) {
+        this.currentUrl = url;
+        this.analysisResults = {};
+        
+        try {
+            // Show loading state
+            this.showLoading();
+            
+            // Run all analysis in parallel
+            const [seoReport, performanceReport, mobileReport, linksReport] = await Promise.all([
+                this.generateSEOReport(url),
+                this.generatePerformanceReport(url),
+                this.generateMobileReport(url),
+                this.generateLinksReport(url)
+            ]);
+
+            this.analysisResults = {
+                seo: seoReport,
+                performance: performanceReport,
+                mobile: mobileReport,
+                links: linksReport,
+                generatedAt: new Date().toISOString()
+            };
+
+            this.displayResults();
+            
+        } catch (error) {
+            console.error('Analysis error:', error);
+            this.showError('Failed to analyze website. Please check the URL and try again.');
+        }
+    }
+
+    // SEO Analysis
+    async generateSEOReport(url) {
+        // Simulate API call - in real implementation, this would call a backend service
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve({
+                    title: 'SEO Analysis Report',
+                    metrics: {
+                        metaTitle: { value: 'Elimuhub Education Consultants', status: 'good' },
+                        metaDescription: { value: 'Present', status: 'good' },
+                        headingStructure: { value: 'H1, H2 tags found', status: 'good' },
+                        keywordDensity: { value: '2.1%', status: 'average' },
+                        imageAltTags: { value: '75%', status: 'needs-improvement' }
+                    },
+                    recommendations: [
+                        'Add alt tags to all images',
+                        'Include more relevant keywords',
+                        'Optimize meta description length'
+                    ]
+                });
+            }, 1000);
+        });
+    }
+
+    // Performance Analysis
+    async generatePerformanceReport(url) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve({
+                    title: 'Performance Report',
+                    metrics: {
+                        loadingSpeed: { value: '2.8s', status: 'good' },
+                        pageSize: { value: '1.2MB', status: 'average' },
+                        requests: { value: '45', status: 'good' },
+                        timeToInteractive: { value: '3.1s', status: 'average' }
+                    },
+                    recommendations: [
+                        'Optimize image sizes',
+                        'Enable browser caching',
+                        'Minify CSS and JavaScript'
+                    ]
+                });
+    }
+
+    // Mobile Analysis
+    async generateMobileReport(url) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve({
+                    title: 'Mobile Responsiveness Report',
+                    metrics: {
+                        mobileFriendly: { value: 'Yes', status: 'good' },
+                        viewport: { value: 'Configured', status: 'good' },
+                        tapTargets: { value: 'Adequate', status: 'good' },
+                        fontSizes: { value: 'Readable', status: 'good' }
+                    },
+                    recommendations: [
+                        'Test on multiple mobile devices',
+                        'Improve touch interactions',
+                        'Optimize for slower connections'
+                    ]
+                });
+            }, 800);
+        });
+    }
+
+    // Links Analysis
+    async generateLinksReport(url) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve({
+                    title: 'Links Analysis Report',
+                    metrics: {
+                        internalLinks: { value: '12', status: 'good' },
+                        externalLinks: { value: '8', status: 'good' },
+                        brokenLinks: { value: '0', status: 'excellent' },
+                        linkQuality: { value: 'High', status: 'good' }
+                    },
+                    recommendations: [
+                        'Add more internal linking',
+                        'Check external link relevance',
+                        'Monitor for broken links regularly'
+                    ]
+                });
+            }, 600);
+        });
+    }
+
+    // Display results in UI
+    displayResults() {
+        const resultsContainer = document.getElementById('analysis-results');
+        const resultsContent = document.getElementById('results-content');
+        const analyzedUrl = document.getElementById('analyzed-url');
+        
+        analyzedUrl.textContent = this.currentUrl;
+        resultsContent.innerHTML = '';
+
+        // Generate results HTML for each report type
+        Object.keys(this.analysisResults).forEach(reportType => {
+            if (reportType === 'generatedAt') return;
+            
+            const report = this.analysisResults[reportType];
+            const reportHTML = this.createReportHTML(report);
+            resultsContent.innerHTML += reportHTML;
+        });
+
+        resultsContainer.style.display = 'block';
+        resultsContainer.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    createReportHTML(report) {
+        let metricsHTML = '';
+        Object.keys(report.metrics).forEach(metricKey => {
+            const metric = report.metrics[metricKey];
+            metricsHTML += `
+                <div class="metric-card">
+                    <div class="metric-value score-${metric.status}">${metric.value}</div>
+                    <div class="metric-label">${this.formatLabel(metricKey)}</div>
+                </div>
+            `;
+        });
+
+        let recommendationsHTML = '';
+        if (report.recommendations) {
+            recommendationsHTML = `
+                <div style="margin-top: 1rem;">
+                    <h5><i class="fas fa-lightbulb"></i> Recommendations</h5>
+                    <ul style="color: #666; margin-left: 1.5rem;">
+                        ${report.recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+
+        return `
+            <div class="report-card">
+                <h4><i class="fas fa-chart-bar"></i> ${report.title}</h4>
+                <div class="metric-grid">
+                    ${metricsHTML}
+                </div>
+                ${recommendationsHTML}
+            </div>
+        `;
+    }
+
+    formatLabel(label) {
+        return label.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+    }
+
+    showLoading() {
+        const resultsContainer = document.getElementById('analysis-results');
+        resultsContainer.style.display = 'block';
+        document.getElementById('results-content').innerHTML = `
+            <div style="text-align: center; padding: 2rem;">
+                <i class="fas fa-spinner fa-spin fa-2x" style="color: #667eea;"></i>
+                <p style="margin-top: 1rem;">Analyzing your Blogger site...</p>
+            </div>
+        `;
+    }
+
+    showError(message) {
+        document.getElementById('results-content').innerHTML = `
+            <div style="text-align: center; padding: 2rem; color: #dc3545;">
+                <i class="fas fa-exclamation-triangle fa-2x"></i>
+                <p style="margin-top: 1rem;">${message}</p>
+            </div>
+        `;
+    }
+}
+
+// Global functions for button clicks
+function generateSEOReport() {
+    const url = document.getElementById('blogger-url').value;
+    const analyzer = new BloggerAnalyzer();
+    analyzer.generateSEOReport(url).then(report => {
+        analyzer.analysisResults = { seo: report };
+        analyzer.displayResults();
+    });
+}
+
+function generatePerformanceReport() {
+    const url = document.getElementById('blogger-url').value;
+    const analyzer = new BloggerAnalyzer();
+    analyzer.generatePerformanceReport(url).then(report => {
+        analyzer.analysisResults = { performance: report };
+        analyzer.displayResults();
+    });
+}
+
+function generateMobileReport() {
+    const url = document.getElementById('blogger-url').value;
+    const analyzer = new BloggerAnalyzer();
+    analyzer.generateMobileReport(url).then(report => {
+        analyzer.analysisResults = { mobile: report };
+        analyzer.displayResults();
+    });
+}
+
+function generateLinksReport() {
+    const url = document.getElementById('blogger-url').value;
+    const analyzer = new BloggerAnalyzer();
+    analyzer.generateLinksReport(url).then(report => {
+        analyzer.analysisResults = { links: report };
+        analyzer.displayResults();
+    });
+}
+
+function downloadReport() {
+    // Simple PDF download simulation
+    const element = document.getElementById('analysis-results');
+    element.style.backgroundColor = 'white';
+    
+    // In real implementation, use libraries like jsPDF
+    alert('PDF report download functionality would be implemented here!');
+    
+    element.style.backgroundColor = '';
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    const analysisForm = document.getElementById('blogger-analysis-form');
+    if (analysisForm) {
+        analysisForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const url = document.getElementById('blogger-url').value;
+            const analyzer = new BloggerAnalyzer();
+            analyzer.analyzeBloggerSite(url);
+        });
+    }
+});
