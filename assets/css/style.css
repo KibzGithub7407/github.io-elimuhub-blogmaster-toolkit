@@ -12,3 +12,10 @@ header, footer {
 h1, h2 {
     color: #0057b7;
 }
+a {
+    color: #0072e5;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
