@@ -11,7 +11,7 @@ A free, professional resource hub for [Elimuhub Education Consultants](https://e
 ## Setup
 
 1. Clone the repo.
-2. Add your logo to `assets/images/logo.png`.
+2. Add your logo to `assets/images/elimuhub-logo-circular.jpg`.
 3. Customize `assets/js/analytics.js` with your API keys.
 4. Deploy with GitHub Pages!
 
