@@ -35,7 +35,73 @@
                 </div>
             </div>
         </section>
+<!-- Add this NEW SECTION after the hero section -->
+<section id="analyzer" class="analyzer-section">
+    <div class="container">
+        <h2>Blogger Website Analyzer</h2>
+        <div class="analyzer-container">
+            <!-- URL Input Form -->
+            <div class="url-input-card">
+                <h3>Analyze Your Blogger Site</h3>
+                <form id="blogger-analysis-form">
+                    <div class="form-group">
+                        <label for="blogger-url">Your Blogger URL:</label>
+                        <input type="url" id="blogger-url" 
+                               value="https://elimuhubconsultants.blogspot.com" 
+                               placeholder="Enter your Blogger URL">
+                    </div>
+                    <button type="submit" class="btn btn-analyze">
+                        <i class="fas fa-chart-bar"></i> Generate Full Report
+                    </button>
+                </form>
+            </div>
 
+            <!-- Quick Analysis Cards -->
+            <div class="quick-analysis-grid">
+                <div class="analysis-card" data-report="seo">
+                    <i class="fas fa-search"></i>
+                    <h4>SEO Report</h4>
+                    <p>Meta tags, headings, keywords</p>
+                    <button class="btn-small" onclick="generateSEOReport()">Run Report</button>
+                </div>
+                
+                <div class="analysis-card" data-report="performance">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <h4>Performance</h4>
+                    <p>Speed & loading times</p>
+                    <button class="btn-small" onclick="generatePerformanceReport()">Run Report</button>
+                </div>
+                
+                <div class="analysis-card" data-report="mobile">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h4>Mobile Check</h4>
+                    <p>Responsiveness test</p>
+                    <button class="btn-small" onclick="generateMobileReport()">Run Report</button>
+                </div>
+                
+                <div class="analysis-card" data-report="links">
+                    <i class="fas fa-link"></i>
+                    <h4>Links Analysis</h4>
+                    <p>Internal & external links</p>
+                    <button class="btn-small" onclick="generateLinksReport()">Run Report</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Display Area -->
+        <div id="analysis-results" class="results-container" style="display: none;">
+            <div class="results-header">
+                <h3>Analysis Report for: <span id="analyzed-url"></span></h3>
+                <button class="btn-download" onclick="downloadReport()">
+                    <i class="fas fa-download"></i> Download PDF
+                </button>
+            </div>
+            <div class="results-grid" id="results-content">
+                <!-- Results will be populated here by JavaScript -->
+            </div>
+        </div>
+    </div>
+</section>
         <section id="tools" class="tools-section">
             <div class="container">
                 <h2>BlogMaster Toolkit</h2>
