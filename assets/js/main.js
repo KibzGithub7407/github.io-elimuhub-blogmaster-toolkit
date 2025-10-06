@@ -100,3 +100,23 @@ const ElimuhubTools = {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = ElimuhubTools;
 }
+// Add to existing assets/js/main.js
+
+// Import analyzer (if using modules)
+// import { BloggerAnalyzer } from './blogger-analyzer.js';
+
+// Or add this to initialize the analyzer
+document.addEventListener('DOMContentLoaded', function() {
+    // Existing code...
+    
+    // Initialize analyzer form
+    const analysisForm = document.getElementById('blogger-analysis-form');
+    if (analysisForm) {
+        analysisForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const url = document.getElementById('blogger-url').value;
+            const analyzer = new BloggerAnalyzer();
+            analyzer.analyzeBloggerSite(url);
+        });
+    }
+});
