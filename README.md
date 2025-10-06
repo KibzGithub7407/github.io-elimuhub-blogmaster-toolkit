@@ -1,12 +1,21 @@
-# github.io-elimuhub-blogmaster-toolkit
-Structured layout and ready-to-paste file paths directory for your GitHub Pages repository. This will instantly generate a professional, deployable resource hub for Elimuhub Education Consultants, designed to work with your Blogger site and provide SEO/webmaster analytics capabilities.
+# Elimuhub Webmaster Toolkit
 
-**1. Repository Information**
-Repository Name: github.io-elimuhub-blogmaster-toolkit
-GitHub Account: KibzGithub7407
-Pages Branch: main (default for GitHub Pages)
-**2. Directory Structure & Essential Files**
-Here are the file paths and their purposes. Copy these paths directly into your repo. The code blocks below include the starter contents for each key file.
+A free, professional resource hub for [Elimuhub Education Consultants](https://elimuhubconsultants.blogspot.com) built on GitHub Pages.
+
+## Features
+
+- SEO inspection & optimization tools
+- Analytics dashboard (Google Analytics, PageSpeed Insights)
+- Easy integration with Blogger
+
+## Setup
+
+1. Clone the repo.
+2. Add your logo to `assets/images/logo.png`.
+3. Customize `assets/js/analytics.js` with your API keys.
+4. Deploy with GitHub Pages!
+
+## Repository structure 
 
 ```
 .github.io-elimuhub-blogmaster-toolkit/
